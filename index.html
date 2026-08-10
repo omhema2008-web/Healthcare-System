@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pulsecare — Doctors, Records &amp; Billing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="#top" class="nav__logo">
+      <span class="logo-pulse" aria-hidden="true">
+        <svg viewBox="0 0 60 20"><polyline points="0,10 14,10 18,2 22,18 26,10 60,10" /></svg>
+      </span>
+      Pulsecare
+    </a>
+
+    <nav class="nav__links" id="navLinks">
+      <a href="#doctors">Doctors</a>
+      <a href="#records">Hospital records</a>
+      <a href="#billing">Billing</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="nav__actions">
+      <a href="#billing" class="btn btn--ghost">Pay a bill</a>
+      <a href="#doctors" class="btn btn--solid">Book a visit</a>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero__grid">
+      <div class="hero__copy">
+        <p class="eyebrow">Live hospital network</p>
+        <h1>Care that keeps <em>rhythm</em> with your life.</h1>
+        <p class="hero__sub">
+          Find an available doctor in minutes, check bed &amp; department status
+          across the hospital, and settle your bill — all from one calm,
+          uncluttered dashboard.
+        </p>
+        <div class="hero__cta">
+          <a href="#doctors" class="btn btn--solid btn--lg">See who's available</a>
+          <a href="#records" class="btn btn--outline btn--lg">View hospital status</a>
+        </div>
+
+        <div class="hero__ticker" id="ticker">
+          <span class="dot dot--live" aria-hidden="true"></span>
+          <span id="tickerText">Loading live status…</span>
+        </div>
+      </div>
+
+      <div class="hero__panel">
+        <div class="vital-card">
+          <div class="vital-card__head">
+            <span>Patient monitor — Ward 4</span>
+            <span class="dot dot--live" aria-hidden="true"></span>
+          </div>
+          <svg class="vital-line" viewBox="0 0 400 120" preserveAspectRatio="none">
+            <polyline id="vitalPath"
+              points="0,60 40,60 55,60 65,20 75,100 85,60 100,60 140,60 155,60 165,20 175,100 185,60 200,60
+                      240,60 255,60 265,20 275,100 285,60 300,60 340,60 355,60 365,20 375,100 385,60 400,60" />
+          </svg>
+          <div class="vital-card__stats">
+            <div><strong>72</strong><span>bpm</span></div>
+            <div><strong>98%</strong><span>SpO₂</span></div>
+            <div><strong>120/80</strong><span>mmHg</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <svg class="section-pulse" id="heroPulse" viewBox="0 0 1200 60" preserveAspectRatio="none">
+      <polyline points="0,30 520,30 545,6 565,54 585,30 1200,30" />
+    </svg>
+  </section>
+
+  <!-- ===== DOCTORS ===== -->
+  <section class="doctors" id="doctors">
+    <div class="section-head">
+      <p class="eyebrow">Available now</p>
+      <h2>Find the right doctor, right now</h2>
+      <p class="section-sub">Filter by specialty and book directly into an open slot.</p>
+    </div>
+
+    <div class="chip-row" id="specialtyChips">
+      <button class="chip is-active" data-filter="all">All</button>
+      <button class="chip" data-filter="Cardiology">Cardiology</button>
+      <button class="chip" data-filter="Pediatrics">Pediatrics</button>
+      <button class="chip" data-filter="Orthopedics">Orthopedics</button>
+      <button class="chip" data-filter="Neurology">Neurology</button>
+      <button class="chip" data-filter="Dermatology">Dermatology</button>
+    </div>
+
+    <div class="doctor-grid" id="doctorGrid"><!-- injected by script.js --></div>
+  </section>
+
+  <!-- ===== HOSPITAL RECORDS / OPS BOARD ===== -->
+  <section class="records" id="records">
+    <div class="section-head section-head--light">
+      <p class="eyebrow">Hospital records</p>
+      <h2>Real-time department status</h2>
+      <p class="section-sub">Bed availability and admissions, updated live across every department.</p>
+    </div>
+
+    <div class="ops-board" id="opsBoard"><!-- injected by script.js --></div>
+
+    <div class="patient-table-wrap">
+      <div class="patient-table__head">
+        <h3>Recent admissions</h3>
+        <span class="tag">Last 24 hours</span>
+      </div>
+      <table class="patient-table">
+        <thead>
+          <tr><th>Patient ID</th><th>Department</th><th>Admitted</th><th>Status</th><th>Room</th></tr>
+        </thead>
+        <tbody id="patientTableBody"><!-- injected by script.js --></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== BILLING / PAYMENT ===== -->
+  <section class="billing" id="billing">
+    <div class="section-head">
+      <p class="eyebrow">Billing</p>
+      <h2>Review your bill, pay in one step</h2>
+      <p class="section-sub">A clear breakdown before you pay — no surprise line items.</p>
+    </div>
+
+    <div class="billing__grid">
+      <div class="invoice-card">
+        <div class="invoice-card__head">
+          <div>
+            <span class="tag">Invoice #PC-48219</span>
+            <h3>Dr. Meera Anand — Cardiology consult</h3>
+          </div>
+          <span class="status-pill status-pill--due">Payment due</span>
+        </div>
+
+        <ul class="invoice-lines">
+          <li><span>Consultation fee</span><span>₹1,200.00</span></li>
+          <li><span>ECG &amp; lab panel</span><span>₹2,450.00</span></li>
+          <li><span>Room charge (1 night)</span><span>₹3,000.00</span></li>
+          <li><span>Pharmacy</span><span>₹680.00</span></li>
+        </ul>
+
+        <div class="invoice-lines invoice-lines--total">
+          <span>Total due</span><span id="invoiceTotal">₹7,330.00</span>
+        </div>
+      </div>
+
+      <form class="pay-card" id="payForm" novalidate>
+        <div class="pay-card__head">
+          <h3>Pay securely</h3>
+          <div class="pay-card__brands" aria-hidden="true">VISA&nbsp;&nbsp;MC&nbsp;&nbsp;UPI</div>
+        </div>
+
+        <label class="field">
+          <span>Card number</span>
+          <input type="text" id="cardNumber" inputmode="numeric" maxlength="19" placeholder="1234 5678 9012 3456" required />
+          <small class="field__error" id="cardNumberError"></small>
+        </label>
+
+        <div class="field-row">
+          <label class="field">
+            <span>Expiry</span>
+            <input type="text" id="cardExpiry" maxlength="5" placeholder="MM/YY" required />
+            <small class="field__error" id="cardExpiryError"></small>
+          </label>
+          <label class="field">
+            <span>CVV</span>
+            <input type="password" id="cardCvv" maxlength="3" inputmode="numeric" placeholder="•••" required />
+            <small class="field__error" id="cardCvvError"></small>
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Name on card</span>
+          <input type="text" id="cardName" placeholder="As shown on card" required />
+          <small class="field__error" id="cardNameError"></small>
+        </label>
+
+        <button type="submit" class="btn btn--solid btn--lg btn--block" id="payBtn">
+          <span id="payBtnText">Pay ₹7,330.00</span>
+        </button>
+        <p class="pay-card__note">Demo form only — no real payment is processed.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT / EMERGENCY ===== -->
+  <section class="emergency" id="contact">
+    <div class="emergency__inner">
+      <div>
+        <span class="dot dot--live" aria-hidden="true"></span>
+        <p class="eyebrow eyebrow--on-dark">24/7 emergency line</p>
+        <h2>Need help right away?</h2>
+      </div>
+      <a href="tel:+911234567890" class="btn btn--outline-light btn--lg">Call +91 12345 67890</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <span class="nav__logo">
+      <span class="logo-pulse" aria-hidden="true">
+        <svg viewBox="0 0 60 20"><polyline points="0,10 14,10 18,2 22,18 26,10 60,10" /></svg>
+      </span>
+      Pulsecare
+    </span>
+    <p>© 2026 Pulsecare Hospital Network. For demonstration purposes only.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
